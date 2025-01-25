@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        table {
+            margin: auto;
+            background-color:palevioletred;
+        }
+        table tr td {
+            padding: 10px;
+        }
+        table button {
+            width: 50px;
+            height: 50px;
+            color: white;
+            background-color:black;
+            border-radius: 50%;
+            border: none;
+        }
+        table input {
+            width: 100%;
+            border-radius: 10px;
+            height: 40px;
+        } 
+        
+       
+    </style>
+    <script>
+        function storedata(v) {
+            var txtinp = document.getElementById('txtinp');
+            var oldvalue = txtinp.value;
+            var t = oldvalue.length;
+            var lastchr = oldvalue[t - 1];
+            var symbol = ["+", "-", "*", "/", "."];
+            if (symbol.includes(v)) {
+                if (symbol.includes(lastchr)) {
+                    var removelast = oldvalue.slice(0, -1);
+                    txtinp.value = removelast + v;
+                } else {
+                    txtinp.value = oldvalue + v;
+                }
+            } else {
+                txtinp.value = oldvalue + v;
+            }
+        }
+
+        function calculate() {
+            var txtinp = document.getElementById('txtinp');
+            try {
+                var result = eval(txtinp.value);
+                txtinp.value = result;
+            } catch (e) {
+                txtinp.value = 'Error';
+            }
+        }
+
+        function clearInput() {
+            document.getElementById('txtinp').value = '';
+        }
+    </script>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <td><button onclick="clearInput()">c</button></td>
+            <td colspan="3"><input type="text" id="txtinp"></td>
+        </tr>
+        <tr>
+            <td><button onclick="storedata('+')">+</button></td>
+            <td><button onclick="storedata('1')">1</button></td>
+            <td><button onclick="storedata('2')">2</button></td>
+            <td><button onclick="storedata('3')">3</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="storedata('-')">-</button></td>
+            <td><button onclick="storedata('4')">4</button></td>
+            <td><button onclick="storedata('5')">5</button></td>
+            <td><button onclick="storedata('6')">6</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="storedata('*')">*</button></td>
+            <td><button onclick="storedata('7')">7</button></td>
+            <td><button onclick="storedata('8')">8</button></td>
+            <td><button onclick="storedata('9')">9</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="storedata('/')">/</button></td>
+            <td><button onclick="storedata('.')">.</button></td>
+            <td><button onclick="storedata('0')">0</button></td>
+            <td><button onclick="calculate()">=</button></td>
+        </tr>
+    </table>
+</body>
+</html>
